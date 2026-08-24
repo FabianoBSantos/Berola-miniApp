@@ -948,7 +948,6 @@ document.getElementById('addToCartBtn').addEventListener('click', ()=>{
   itemOverlay.classList.remove('show');
   history.replaceState(null,'',location.pathname);
   refreshCartUI();
-  openCart();
 });
 
 function addLine(item, cat, size, qty, obs){
