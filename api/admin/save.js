@@ -36,6 +36,6 @@ module.exports = async function handler(req, res) {
     await writeCatalog(data);
     res.status(200).json({ ok: true });
   } catch (e) {
-    res.status(500).json({ error: 'store_error' });
+    res.status(500).json({ error: 'store_error', message: e.message });
   }
 };
