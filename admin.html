@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>Berola Confeitaria — Administração</title>
+<style>
+  :root{
+    --navy:#141a3d; --navy-2:#1f265c; --gold:#d9a92c; --line:#e7e2d3;
+    --bg:#faf7ef; --ok:#2f8f4e; --danger:#c0392b;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;background:var(--bg);color:#232323}
+  header{background:var(--navy);color:#fff;padding:16px 20px;display:flex;align-items:center;justify-content:space-between}
+  header h1{font-size:1.05rem;margin:0}
+  header .sub{color:#c9c4ae;font-size:.8rem}
+  #logoutBtn{background:transparent;border:1px solid rgba(255,255,255,.35);color:#fff;padding:8px 14px;border-radius:8px;cursor:pointer;font-size:.85rem}
+  #logoutBtn:hover{background:rgba(255,255,255,.1)}
+
+  main{max-width:900px;margin:0 auto;padding:18px 16px 80px}
+
+  /* Login */
+  #loginScreen{max-width:340px;margin:80px auto;background:#fff;border:1px solid var(--line);border-radius:14px;padding:28px;text-align:center}
+  #loginScreen h2{margin-top:0;font-size:1.1rem}
+  #loginScreen input{width:100%;padding:12px;border:1px solid var(--line);border-radius:8px;font-size:1rem;margin:10px 0}
+  #loginScreen button{width:100%;padding:12px;border:none;border-radius:8px;background:var(--navy);color:#fff;font-weight:600;cursor:pointer;font-size:1rem}
+  #loginScreen button:hover{background:var(--navy-2)}
+  #loginError{color:var(--danger);font-size:.85rem;min-height:18px;margin-top:6px}
+
+  /* Panel */
+  #panel{display:none}
+  .toolbar{display:flex;gap:10px;margin:14px 0;flex-wrap:wrap}
+  #searchBox{flex:1;min-width:200px;padding:10px 12px;border:1px solid var(--line);border-radius:8px;font-size:.95rem}
+  .savedFlag{color:var(--ok);font-size:.8rem;opacity:0;transition:opacity .3s}
+  .savedFlag.show{opacity:1}
+
+  .catSection{background:#fff;border:1px solid var(--line);border-radius:12px;margin-bottom:16px;overflow:hidden}
+  .catHead{background:#f3efe2;padding:12px 16px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px}
+  .catHead h2{margin:0;font-size:1rem}
+  .priceEdit{display:flex;align-items:center;gap:6px;font-size:.9rem}
+  .priceEdit label{color:#555}
+  .priceEdit input{width:80px;padding:6px 8px;border:1px solid var(--line);border-radius:6px;text-align:right}
+
+  .itemsList{padding:6px 16px}
+  .itemRow{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:10px 0;border-bottom:1px solid #f0ede1}
+  .itemRow:last-child{border-bottom:none}
+  .itemName{flex:1;font-size:.92rem}
+  .stockEdit{display:flex;align-items:center;gap:8px}
+  .stockEdit input{width:64px;padding:6px 8px;border:1px solid var(--line);border-radius:6px;text-align:center}
+  .stockEdit .zero{color:var(--danger);font-weight:600}
+  .hint{color:#8a8474;font-size:.78rem;margin:4px 0 18px}
+</style>
+</head>
+<body>
+
+<header>
+  <div>
+    <h1>Berola Confeitaria</h1>
+    <div class="sub">Administração — estoque e preços</div>
+  </div>
+  <button id="logoutBtn" style="display:none">Sair</button>
+</header>
+
+<div id="loginScreen">
+  <h2>Entrar</h2>
+  <input type="password" id="passwordInput" placeholder="Senha de administrador" autocomplete="current-password">
+  <button id="loginBtn">Entrar</button>
+  <div id="loginError"></div>
+</div>
+
+<main id="panel">
+  <div class="toolbar">
+    <input id="searchBox" type="text" placeholder="Buscar produto por nome...">
+    <span class="savedFlag" id="savedFlag">✓ Salvo</span>
+  </div>
+  <p class="hint">Deixe o estoque em <strong>0</strong> pra um produto sumir da venda no site (ele fica marcado como "Esgotado"). O preço se aplica a todos os itens da categoria.</p>
+  <div id="catContainer"></div>
+</main>
+
+<script>
+const loginScreen = document.getElementById('loginScreen');
+const panel = document.getElementById('panel');
+const logoutBtn = document.getElementById('logoutBtn');
+const savedFlag = document.getElementById('savedFlag');
+
+let ITEMS = [];
+let CATEGORIES = [];
+let currentStock = {};
+let currentPrices = {};
+
+function fmt(n){ return 'R$ ' + Number(n).toFixed(2).replace('.', ','); }
+
+function flashSaved(){
+  savedFlag.classList.add('show');
+  clearTimeout(flashSaved._t);
+  flashSaved._t = setTimeout(()=>savedFlag.classList.remove('show'), 1200);
+}
+
+async function checkAuth(){
+  const r = await fetch('/api/admin/check');
+  const data = await r.json();
+  return data.authenticated;
+}
+
+async function doLogin(){
+  const pass = document.getElementById('passwordInput').value;
+  const errEl = document.getElementById('loginError');
+  errEl.textContent = '';
+  if(!pass){ errEl.textContent = 'Digite a senha.'; return; }
+  try{
+    const r = await fetch('/api/admin/login', {
+      method:'POST', headers:{'Content-Type':'application/json'},
+      body: JSON.stringify({password: pass})
+    });
+    if(r.ok){ await boot(); }
+    else{
+      const data = await r.json().catch(()=>({}));
+      errEl.textContent = data.error === 'server_not_configured'
+        ? 'Senha de administrador ainda não foi configurada no servidor.'
+        : 'Senha incorreta.';
+    }
+  }catch(e){
+    errEl.textContent = 'Erro de conexão. Tente novamente.';
+  }
+}
+
+document.getElementById('loginBtn').addEventListener('click', doLogin);
+document.getElementById('passwordInput').addEventListener('keydown', e=>{ if(e.key==='Enter') doLogin(); });
+
+logoutBtn.addEventListener('click', async ()=>{
+  await fetch('/api/admin/logout', {method:'POST'});
+  location.reload();
+});
+
+async function loadData(){
+  const [itemsRes, catalogRes] = await Promise.all([
+    fetch('/items.json'),
+    fetch('/api/catalog')
+  ]);
+  ITEMS = await itemsRes.json();
+  const catalog = await catalogRes.json();
+  CATEGORIES = catalog.defaults;
+  currentStock = catalog.stock || {};
+  currentPrices = catalog.prices || {};
+}
+
+function priceFieldsFor(cat){
+  const override = currentPrices[cat.id] || {};
+  if(cat.sized){
+    return {
+      priceP: override.priceP ?? cat.priceP,
+      priceG: override.priceG ?? cat.priceG
+    };
+  }
+  return { price: override.price ?? cat.price };
+}
+
+async function saveStock(slug, value, inputEl){
+  inputEl.disabled = true;
+  try{
+    const r = await fetch('/api/admin/save', {
+      method:'POST', headers:{'Content-Type':'application/json'},
+      body: JSON.stringify({type:'stock', slug, value})
+    });
+    if(r.ok){ flashSaved(); currentStock[slug] = value; inputEl.classList.toggle('zero', value===0); }
+  }finally{
+    inputEl.disabled = false;
+  }
+}
+
+async function savePrice(catId, value){
+  const r = await fetch('/api/admin/save', {
+    method:'POST', headers:{'Content-Type':'application/json'},
+    body: JSON.stringify({type:'price', catId, value})
+  });
+  if(r.ok){ flashSaved(); currentPrices[catId] = value; }
+}
+
+function render(filter){
+  const container = document.getElementById('catContainer');
+  container.innerHTML = '';
+  const q = (filter||'').trim().toLowerCase();
+
+  CATEGORIES.forEach(cat=>{
+    const catItems = ITEMS.filter(it=>it.catId===cat.id && (!q || it.name.toLowerCase().includes(q)));
+    if(q && catItems.length===0) return;
+
+    const section = document.createElement('div');
+    section.className = 'catSection';
+
+    const head = document.createElement('div');
+    head.className = 'catHead';
+    const fields = priceFieldsFor(cat);
+
+    let priceHtml = '';
+    if(cat.sized){
+      priceHtml = `
+        <div class="priceEdit"><label>P</label><input type="number" step="0.01" min="0" value="${fields.priceP ?? ''}" data-cat="${cat.id}" data-field="priceP"></div>
+        <div class="priceEdit"><label>G</label><input type="number" step="0.01" min="0" value="${fields.priceG ?? ''}" data-cat="${cat.id}" data-field="priceG"></div>
+      `;
+    } else {
+      priceHtml = `<div class="priceEdit"><label>Preço</label><input type="number" step="0.01" min="0" value="${fields.price ?? ''}" data-cat="${cat.id}" data-field="price"></div>`;
+    }
+
+    head.innerHTML = `<h2>${cat.name}</h2><div style="display:flex;gap:10px;flex-wrap:wrap">${priceHtml}</div>`;
+    section.appendChild(head);
+
+    const list = document.createElement('div');
+    list.className = 'itemsList';
+
+    catItems.forEach(it=>{
+      const row = document.createElement('div');
+      row.className = 'itemRow';
+      const stockVal = currentStock[it.slug];
+      const displayVal = (stockVal===undefined || stockVal===null) ? '' : stockVal;
+      row.innerHTML = `
+        <span class="itemName">${it.name}</span>
+        <div class="stockEdit">
+          <input type="number" min="0" step="1" placeholder="—" value="${displayVal}" data-slug="${it.slug}" class="${stockVal===0?'zero':''}">
+        </div>
+      `;
+      list.appendChild(row);
+    });
+
+    section.appendChild(list);
+    container.appendChild(section);
+
+    // wire price inputs
+    head.querySelectorAll('input[data-cat]').forEach(inp=>{
+      inp.addEventListener('change', ()=>{
+        const catId = inp.dataset.cat;
+        const catDef = CATEGORIES.find(c=>c.id===catId);
+        const val = parseFloat(inp.value);
+        if(isNaN(val) || val < 0) return;
+        if(catDef.sized){
+          const pInp = head.querySelector('input[data-field="priceP"]');
+          const gInp = head.querySelector('input[data-field="priceG"]');
+          savePrice(catId, { priceP: parseFloat(pInp.value)||0, priceG: parseFloat(gInp.value)||0 });
+        } else {
+          savePrice(catId, { price: val });
+        }
+      });
+    });
+
+    // wire stock inputs
+    list.querySelectorAll('input[data-slug]').forEach(inp=>{
+      inp.addEventListener('change', ()=>{
+        const val = parseInt(inp.value, 10);
+        if(isNaN(val) || val < 0){ inp.value = currentStock[inp.dataset.slug] ?? ''; return; }
+        saveStock(inp.dataset.slug, val, inp);
+      });
+    });
+  });
+}
+
+document.getElementById('searchBox').addEventListener('input', (e)=>render(e.target.value));
+
+async function boot(){
+  loginScreen.style.display = 'none';
+  logoutBtn.style.display = 'inline-block';
+  panel.style.display = 'block';
+  await loadData();
+  render('');
+}
+
+(async function init(){
+  const authed = await checkAuth();
+  if(authed){
+    await boot();
+  } else {
+    loginScreen.style.display = 'block';
+  }
+})();
+</script>
+</body>
+</html>

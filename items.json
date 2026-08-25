@@ -1,0 +1,950 @@
+[
+ {
+  "slug": "doces-beijo-berola",
+  "catId": "doces",
+  "catName": "Doces",
+  "name": "Beijo Berola"
+ },
+ {
+  "slug": "doces-beijo-de-alemao",
+  "catId": "doces",
+  "catName": "Doces",
+  "name": "Beijo de Alemão"
+ },
+ {
+  "slug": "doces-beijo-de-mulata",
+  "catId": "doces",
+  "catName": "Doces",
+  "name": "Beijo de Mulata"
+ },
+ {
+  "slug": "doces-bem-casado",
+  "catId": "doces",
+  "catName": "Doces",
+  "name": "Bem-Casado"
+ },
+ {
+  "slug": "doces-bem-casado-doce-de-leite",
+  "catId": "doces",
+  "catName": "Doces",
+  "name": "Bem-Casado Doce de Leite"
+ },
+ {
+  "slug": "doces-bombom-crocante",
+  "catId": "doces",
+  "catName": "Doces",
+  "name": "Bombom Crocante"
+ },
+ {
+  "slug": "doces-bombom-de-cereja",
+  "catId": "doces",
+  "catName": "Doces",
+  "name": "Bombom de Cereja"
+ },
+ {
+  "slug": "doces-bombom-de-damasco",
+  "catId": "doces",
+  "catName": "Doces",
+  "name": "Bombom de Damasco"
+ },
+ {
+  "slug": "doces-bombom-de-morango",
+  "catId": "doces",
+  "catName": "Doces",
+  "name": "Bombom de Morango"
+ },
+ {
+  "slug": "doces-bombom-mousse",
+  "catId": "doces",
+  "catName": "Doces",
+  "name": "Bombom Mousse"
+ },
+ {
+  "slug": "doces-bombom-de-nozes",
+  "catId": "doces",
+  "catName": "Doces",
+  "name": "Bombom de Nozes"
+ },
+ {
+  "slug": "doces-bombom-misto",
+  "catId": "doces",
+  "catName": "Doces",
+  "name": "Bombom Misto"
+ },
+ {
+  "slug": "doces-branquinho",
+  "catId": "doces",
+  "catName": "Doces",
+  "name": "Branquinho"
+ },
+ {
+  "slug": "doces-branquinho-brule",
+  "catId": "doces",
+  "catName": "Doces",
+  "name": "Branquinho Brulê"
+ },
+ {
+  "slug": "doces-branquinho-de-limao",
+  "catId": "doces",
+  "catName": "Doces",
+  "name": "Branquinho de Limão"
+ },
+ {
+  "slug": "doces-brigadeiro",
+  "catId": "doces",
+  "catName": "Doces",
+  "name": "Brigadeiro"
+ },
+ {
+  "slug": "doces-brigadeiro-de-beijinho",
+  "catId": "doces",
+  "catName": "Doces",
+  "name": "Brigadeiro de Beijinho"
+ },
+ {
+  "slug": "doces-brigadeiro-de-churros",
+  "catId": "doces",
+  "catName": "Doces",
+  "name": "Brigadeiro de Churros"
+ },
+ {
+  "slug": "doces-brigadeiro-de-ninho",
+  "catId": "doces",
+  "catName": "Doces",
+  "name": "Brigadeiro de Ninho"
+ },
+ {
+  "slug": "doces-brigadeiro-de-nozes",
+  "catId": "doces",
+  "catName": "Doces",
+  "name": "Brigadeiro de Nozes"
+ },
+ {
+  "slug": "doces-brigadeiro-gourmet",
+  "catId": "doces",
+  "catName": "Doces",
+  "name": "Brigadeiro Gourmet"
+ },
+ {
+  "slug": "doces-brigadeiro-meio-a-meio",
+  "catId": "doces",
+  "catName": "Doces",
+  "name": "Brigadeiro Meio a Meio"
+ },
+ {
+  "slug": "doces-brigadeiro-de-negresco",
+  "catId": "doces",
+  "catName": "Doces",
+  "name": "Brigadeiro de Negresco"
+ },
+ {
+  "slug": "doces-brigadeiro-de-nesquik",
+  "catId": "doces",
+  "catName": "Doces",
+  "name": "Brigadeiro de Nesquik"
+ },
+ {
+  "slug": "doces-brigadeiro-de-pacoca",
+  "catId": "doces",
+  "catName": "Doces",
+  "name": "Brigadeiro de Paçoca"
+ },
+ {
+  "slug": "doces-brigadeiro-de-prestigio",
+  "catId": "doces",
+  "catName": "Doces",
+  "name": "Brigadeiro de Prestígio"
+ },
+ {
+  "slug": "doces-brigadeiro-de-stikadinho",
+  "catId": "doces",
+  "catName": "Doces",
+  "name": "Brigadeiro de Stikadinho"
+ },
+ {
+  "slug": "doces-camafeu",
+  "catId": "doces",
+  "catName": "Doces",
+  "name": "Camafeu"
+ },
+ {
+  "slug": "doces-casadinho",
+  "catId": "doces",
+  "catName": "Doces",
+  "name": "Casadinho"
+ },
+ {
+  "slug": "doces-ceu-de-nozes",
+  "catId": "doces",
+  "catName": "Doces",
+  "name": "Céu de Nozes"
+ },
+ {
+  "slug": "doces-delicia-de-amendoim",
+  "catId": "doces",
+  "catName": "Doces",
+  "name": "Delícia de Amendoim"
+ },
+ {
+  "slug": "doces-dona-berola",
+  "catId": "doces",
+  "catName": "Doces",
+  "name": "Dona Berola"
+ },
+ {
+  "slug": "doces-fios-de-ovos-assado",
+  "catId": "doces",
+  "catName": "Doces",
+  "name": "Fios de Ovos Assado"
+ },
+ {
+  "slug": "doces-fios-de-ovos-com-amendoas",
+  "catId": "doces",
+  "catName": "Doces",
+  "name": "Fios de Ovos com Amêndoas"
+ },
+ {
+  "slug": "doces-fios-de-ovos-com-coco",
+  "catId": "doces",
+  "catName": "Doces",
+  "name": "Fios de Ovos com Coco"
+ },
+ {
+  "slug": "doces-fios-de-ovos-com-nozes",
+  "catId": "doces",
+  "catName": "Doces",
+  "name": "Fios de Ovos com Nozes"
+ },
+ {
+  "slug": "doces-mini-cheesecake-goiaba",
+  "catId": "doces",
+  "catName": "Doces",
+  "name": "Mini Cheesecake Goiaba"
+ },
+ {
+  "slug": "doces-mini-cheesecake-morango",
+  "catId": "doces",
+  "catName": "Doces",
+  "name": "Mini Cheesecake Morango"
+ },
+ {
+  "slug": "doces-ninho",
+  "catId": "doces",
+  "catName": "Doces",
+  "name": "Ninho"
+ },
+ {
+  "slug": "doces-ninho-glaceado",
+  "catId": "doces",
+  "catName": "Doces",
+  "name": "Ninho Glaceado"
+ },
+ {
+  "slug": "doces-ninho-glaceado-com-coco",
+  "catId": "doces",
+  "catName": "Doces",
+  "name": "Ninho Glaceado com Coco"
+ },
+ {
+  "slug": "doces-olho-de-sogra",
+  "catId": "doces",
+  "catName": "Doces",
+  "name": "Olho de Sogra"
+ },
+ {
+  "slug": "doces-olho-de-sogra-assado",
+  "catId": "doces",
+  "catName": "Doces",
+  "name": "Olho de Sogra Assado"
+ },
+ {
+  "slug": "doces-panelinha-de-coco",
+  "catId": "doces",
+  "catName": "Doces",
+  "name": "Panelinha de Coco"
+ },
+ {
+  "slug": "doces-papo-de-anjo",
+  "catId": "doces",
+  "catName": "Doces",
+  "name": "Papo de Anjo"
+ },
+ {
+  "slug": "doces-pastel-de-belem",
+  "catId": "doces",
+  "catName": "Doces",
+  "name": "Pastel de Belém"
+ },
+ {
+  "slug": "doces-pastel-santa-clara",
+  "catId": "doces",
+  "catName": "Doces",
+  "name": "Pastel Santa Clara"
+ },
+ {
+  "slug": "doces-pelota",
+  "catId": "doces",
+  "catName": "Doces",
+  "name": "Pelota"
+ },
+ {
+  "slug": "doces-prestigio",
+  "catId": "doces",
+  "catName": "Doces",
+  "name": "Prestígio"
+ },
+ {
+  "slug": "doces-queijadinha",
+  "catId": "doces",
+  "catName": "Doces",
+  "name": "Queijadinha"
+ },
+ {
+  "slug": "doces-quindim",
+  "catId": "doces",
+  "catName": "Doces",
+  "name": "Quindim"
+ },
+ {
+  "slug": "doces-quindim-coberto-de-chocolate",
+  "catId": "doces",
+  "catName": "Doces",
+  "name": "Quindim Coberto de Chocolate"
+ },
+ {
+  "slug": "doces-quindim-de-leite-condensado",
+  "catId": "doces",
+  "catName": "Doces",
+  "name": "Quindim de Leite Condensado"
+ },
+ {
+  "slug": "doces-quindim-de-nozes",
+  "catId": "doces",
+  "catName": "Doces",
+  "name": "Quindim de Nozes"
+ },
+ {
+  "slug": "doces-quindim-recheado-de-nozes",
+  "catId": "doces",
+  "catName": "Doces",
+  "name": "Quindim Recheado de Nozes"
+ },
+ {
+  "slug": "doces-roteiro-do-charme",
+  "catId": "doces",
+  "catName": "Doces",
+  "name": "Roteiro do Charme"
+ },
+ {
+  "slug": "doces-sete-de-abril",
+  "catId": "doces",
+  "catName": "Doces",
+  "name": "Sete de Abril"
+ },
+ {
+  "slug": "doces-sinha-amelia",
+  "catId": "doces",
+  "catName": "Doces",
+  "name": "Sinhá Amélia"
+ },
+ {
+  "slug": "doces-tortinha-de-maracuja",
+  "catId": "doces",
+  "catName": "Doces",
+  "name": "Tortinha de Maracujá"
+ },
+ {
+  "slug": "doces-tortinha-brasileira",
+  "catId": "doces",
+  "catName": "Doces",
+  "name": "Tortinha Brasileira"
+ },
+ {
+  "slug": "doces-tortinha-de-limao",
+  "catId": "doces",
+  "catName": "Doces",
+  "name": "Tortinha de Limão"
+ },
+ {
+  "slug": "doces-trouxinha-de-amendoim",
+  "catId": "doces",
+  "catName": "Doces",
+  "name": "Trouxinha de Amendoim"
+ },
+ {
+  "slug": "doces-trouxinha-de-branquinho",
+  "catId": "doces",
+  "catName": "Doces",
+  "name": "Trouxinha de Branquinho"
+ },
+ {
+  "slug": "doces-trouxinha-de-branquinho-com-raspas",
+  "catId": "doces",
+  "catName": "Doces",
+  "name": "Trouxinha de Branquinho com Raspas"
+ },
+ {
+  "slug": "doces-trouxinha-de-brigadeiro",
+  "catId": "doces",
+  "catName": "Doces",
+  "name": "Trouxinha de Brigadeiro"
+ },
+ {
+  "slug": "doces-trouxinha-de-chocolate",
+  "catId": "doces",
+  "catName": "Doces",
+  "name": "Trouxinha de Chocolate"
+ },
+ {
+  "slug": "doces-trouxinha-de-churros",
+  "catId": "doces",
+  "catName": "Doces",
+  "name": "Trouxinha de Churros"
+ },
+ {
+  "slug": "doces-trouxinha-de-prestigio",
+  "catId": "doces",
+  "catName": "Doces",
+  "name": "Trouxinha de Prestígio"
+ },
+ {
+  "slug": "doces-biscoite-recheado-chocolate",
+  "catId": "doces",
+  "catName": "Doces",
+  "name": "Biscoite Recheado Chocolate"
+ },
+ {
+  "slug": "doces-biscoite-recheado-branquinho",
+  "catId": "doces",
+  "catName": "Doces",
+  "name": "Biscoite Recheado Branquinho"
+ },
+ {
+  "slug": "doces-biscoite-recheado-ninho",
+  "catId": "doces",
+  "catName": "Doces",
+  "name": "Biscoite Recheado Ninho"
+ },
+ {
+  "slug": "doces-biscoite-recheado-morango",
+  "catId": "doces",
+  "catName": "Doces",
+  "name": "Biscoite Recheado Morango"
+ },
+ {
+  "slug": "balde-beijo-alemao",
+  "catId": "balde",
+  "catName": "Bolos de Balde",
+  "name": "Beijo Alemão"
+ },
+ {
+  "slug": "balde-brigadeiro-e-branquinho",
+  "catId": "balde",
+  "catName": "Bolos de Balde",
+  "name": "Brigadeiro e Branquinho"
+ },
+ {
+  "slug": "balde-brigadeiro",
+  "catId": "balde",
+  "catName": "Bolos de Balde",
+  "name": "Brigadeiro"
+ },
+ {
+  "slug": "balde-leite-em-po",
+  "catId": "balde",
+  "catName": "Bolos de Balde",
+  "name": "Leite em Pó"
+ },
+ {
+  "slug": "balde-nozes",
+  "catId": "balde",
+  "catName": "Bolos de Balde",
+  "name": "Nozes"
+ },
+ {
+  "slug": "balde-prestigio",
+  "catId": "balde",
+  "catName": "Bolos de Balde",
+  "name": "Prestígio"
+ },
+ {
+  "slug": "zero-beijo-de-mulata",
+  "catId": "zero",
+  "catName": "Linha Zero",
+  "name": "Beijo de Mulata"
+ },
+ {
+  "slug": "zero-bombom-de-morango",
+  "catId": "zero",
+  "catName": "Linha Zero",
+  "name": "Bombom de Morango"
+ },
+ {
+  "slug": "zero-brigadeiro",
+  "catId": "zero",
+  "catName": "Linha Zero",
+  "name": "Brigadeiro"
+ },
+ {
+  "slug": "zero-mini-banoffe",
+  "catId": "zero",
+  "catName": "Linha Zero",
+  "name": "Mini Banoffe"
+ },
+ {
+  "slug": "zero-trouxinha-de-nozes",
+  "catId": "zero",
+  "catName": "Linha Zero",
+  "name": "Trouxinha de Nozes"
+ },
+ {
+  "slug": "zero-mousse-de-chocolate",
+  "catId": "zero",
+  "catName": "Linha Zero",
+  "name": "Mousse de Chocolate"
+ },
+ {
+  "slug": "zero-mousse-de-limao",
+  "catId": "zero",
+  "catName": "Linha Zero",
+  "name": "Mousse de Limão"
+ },
+ {
+  "slug": "zero-pave-alemao",
+  "catId": "zero",
+  "catName": "Linha Zero",
+  "name": "Pavê Alemão"
+ },
+ {
+  "slug": "zero-bolo-de-balde-bariloche",
+  "catId": "zero",
+  "catName": "Linha Zero",
+  "name": "Bolo de Balde Bariloche"
+ },
+ {
+  "slug": "zero-bolo-de-balde-brigadeiro",
+  "catId": "zero",
+  "catName": "Linha Zero",
+  "name": "Bolo de Balde Brigadeiro"
+ },
+ {
+  "slug": "zero-torta-bariloche",
+  "catId": "zero",
+  "catName": "Linha Zero",
+  "name": "Torta Bariloche"
+ },
+ {
+  "slug": "zero-torta-brigadeiro",
+  "catId": "zero",
+  "catName": "Linha Zero",
+  "name": "Torta Brigadeiro"
+ },
+ {
+  "slug": "mini-beijo-de-alemao",
+  "catId": "mini",
+  "catName": "Mini Doces",
+  "name": "Beijo de Alemão"
+ },
+ {
+  "slug": "mini-bombom-de-nozes",
+  "catId": "mini",
+  "catName": "Mini Doces",
+  "name": "Bombom de Nozes"
+ },
+ {
+  "slug": "mini-camafeu",
+  "catId": "mini",
+  "catName": "Mini Doces",
+  "name": "Camafeu"
+ },
+ {
+  "slug": "mini-bem-casado",
+  "catId": "mini",
+  "catName": "Mini Doces",
+  "name": "Bem-Casado"
+ },
+ {
+  "slug": "mini-bombom-misto",
+  "catId": "mini",
+  "catName": "Mini Doces",
+  "name": "Bombom Misto"
+ },
+ {
+  "slug": "mini-ninho",
+  "catId": "mini",
+  "catName": "Mini Doces",
+  "name": "Ninho"
+ },
+ {
+  "slug": "mini-bombom-de-cereja",
+  "catId": "mini",
+  "catName": "Mini Doces",
+  "name": "Bombom de Cereja"
+ },
+ {
+  "slug": "mini-branquinho",
+  "catId": "mini",
+  "catName": "Mini Doces",
+  "name": "Branquinho"
+ },
+ {
+  "slug": "mini-bombom-de-morango-tradicional",
+  "catId": "mini",
+  "catName": "Mini Doces",
+  "name": "Bombom de Morango Tradicional"
+ },
+ {
+  "slug": "mini-brigadeiro",
+  "catId": "mini",
+  "catName": "Mini Doces",
+  "name": "Brigadeiro"
+ },
+ {
+  "slug": "mini-tortinha-mista",
+  "catId": "mini",
+  "catName": "Mini Doces",
+  "name": "Tortinha Mista"
+ },
+ {
+  "slug": "mini-trouxinha-de-leite-em-po-com-avela",
+  "catId": "mini",
+  "catName": "Mini Doces",
+  "name": "Trouxinha de Leite em Pó com Avelã"
+ },
+ {
+  "slug": "mini-pastel-de-belem",
+  "catId": "mini",
+  "catName": "Mini Doces",
+  "name": "Pastel de Belém"
+ },
+ {
+  "slug": "mini-tortinha-tripla",
+  "catId": "mini",
+  "catName": "Mini Doces",
+  "name": "Tortinha Tripla"
+ },
+ {
+  "slug": "mini-trouxinha-de-nozes",
+  "catId": "mini",
+  "catName": "Mini Doces",
+  "name": "Trouxinha de Nozes"
+ },
+ {
+  "slug": "mini-quindim",
+  "catId": "mini",
+  "catName": "Mini Doces",
+  "name": "Quindim"
+ },
+ {
+  "slug": "mini-trouxinha-de-amendoim",
+  "catId": "mini",
+  "catName": "Mini Doces",
+  "name": "Trouxinha de Amendoim"
+ },
+ {
+  "slug": "mini-tortinha-de-limao",
+  "catId": "mini",
+  "catName": "Mini Doces",
+  "name": "Tortinha de Limão"
+ },
+ {
+  "slug": "mini-trouxinha-de-brigadeiro",
+  "catId": "mini",
+  "catName": "Mini Doces",
+  "name": "Trouxinha de Brigadeiro"
+ },
+ {
+  "slug": "mini-tortinha-de-maracuja",
+  "catId": "mini",
+  "catName": "Mini Doces",
+  "name": "Tortinha de Maracujá"
+ },
+ {
+  "slug": "mini-trouxinha-de-damasco",
+  "catId": "mini",
+  "catName": "Mini Doces",
+  "name": "Trouxinha de Damasco"
+ },
+ {
+  "slug": "mousse-mousse-de-chocolate",
+  "catId": "mousse",
+  "catName": "Mousses e Pavês",
+  "name": "Mousse de Chocolate"
+ },
+ {
+  "slug": "mousse-mousse-de-limao",
+  "catId": "mousse",
+  "catName": "Mousses e Pavês",
+  "name": "Mousse de Limão"
+ },
+ {
+  "slug": "mousse-mousse-de-maracuja",
+  "catId": "mousse",
+  "catName": "Mousses e Pavês",
+  "name": "Mousse de Maracujá"
+ },
+ {
+  "slug": "mousse-pave-alemao",
+  "catId": "mousse",
+  "catName": "Mousses e Pavês",
+  "name": "Pavê Alemão"
+ },
+ {
+  "slug": "mousse-pave-de-bombom",
+  "catId": "mousse",
+  "catName": "Mousses e Pavês",
+  "name": "Pavê de Bombom"
+ },
+ {
+  "slug": "mousse-rei-alberto",
+  "catId": "mousse",
+  "catName": "Mousses e Pavês",
+  "name": "Rei Alberto"
+ },
+ {
+  "slug": "sorvete-bombom-de-morango",
+  "catId": "sorvete",
+  "catName": "Sorvetes",
+  "name": "Bombom de Morango"
+ },
+ {
+  "slug": "sorvete-chocolate",
+  "catId": "sorvete",
+  "catName": "Sorvetes",
+  "name": "Chocolate"
+ },
+ {
+  "slug": "sorvete-creme",
+  "catId": "sorvete",
+  "catName": "Sorvetes",
+  "name": "Creme"
+ },
+ {
+  "slug": "sorvete-doce-de-leite",
+  "catId": "sorvete",
+  "catName": "Sorvetes",
+  "name": "Doce de Leite"
+ },
+ {
+  "slug": "sorvete-quindim",
+  "catId": "sorvete",
+  "catName": "Sorvetes",
+  "name": "Quindim"
+ },
+ {
+  "slug": "sorvete-torta-de-limao",
+  "catId": "sorvete",
+  "catName": "Sorvetes",
+  "name": "Torta de Limão"
+ },
+ {
+  "slug": "tortasorvete-brasileira",
+  "catId": "tortasorvete",
+  "catName": "Tortas de Sorvete",
+  "name": "Brasileira"
+ },
+ {
+  "slug": "tortasorvete-chocolate",
+  "catId": "tortasorvete",
+  "catName": "Tortas de Sorvete",
+  "name": "Chocolate"
+ },
+ {
+  "slug": "tortasorvete-limao",
+  "catId": "tortasorvete",
+  "catName": "Tortas de Sorvete",
+  "name": "Limão"
+ },
+ {
+  "slug": "tortasorvete-maracuja",
+  "catId": "tortasorvete",
+  "catName": "Tortas de Sorvete",
+  "name": "Maracujá"
+ },
+ {
+  "slug": "tortasorvete-marta-rocha",
+  "catId": "tortasorvete",
+  "catName": "Tortas de Sorvete",
+  "name": "Marta Rocha"
+ },
+ {
+  "slug": "tortasorvete-mista",
+  "catId": "tortasorvete",
+  "catName": "Tortas de Sorvete",
+  "name": "Mista"
+ },
+ {
+  "slug": "tortasorvete-quindim",
+  "catId": "tortasorvete",
+  "catName": "Tortas de Sorvete",
+  "name": "Quindim"
+ },
+ {
+  "slug": "tortap-cheesecake-de-goiaba",
+  "catId": "tortap",
+  "catName": "Tortas P",
+  "name": "Cheesecake de Goiaba"
+ },
+ {
+  "slug": "tortap-cheesecake-de-morango",
+  "catId": "tortap",
+  "catName": "Tortas P",
+  "name": "Cheesecake de Morango"
+ },
+ {
+  "slug": "tortap-torta-banoffe",
+  "catId": "tortap",
+  "catName": "Tortas P",
+  "name": "Torta Banoffe"
+ },
+ {
+  "slug": "tortap-torta-de-limao",
+  "catId": "tortap",
+  "catName": "Tortas P",
+  "name": "Torta de Limão"
+ },
+ {
+  "slug": "tortap-torta-mousse",
+  "catId": "tortap",
+  "catName": "Tortas P",
+  "name": "Torta Mousse"
+ },
+ {
+  "slug": "tortap-torta-mundo",
+  "catId": "tortap",
+  "catName": "Tortas P",
+  "name": "Torta Mundo"
+ },
+ {
+  "slug": "tortap-dois-amores",
+  "catId": "tortap",
+  "catName": "Tortas P",
+  "name": "Dois Amores"
+ },
+ {
+  "slug": "tortap-chick-brigadeiro",
+  "catId": "tortap",
+  "catName": "Tortas P",
+  "name": "Chick Brigadeiro"
+ },
+ {
+  "slug": "tortap-duo",
+  "catId": "tortap",
+  "catName": "Tortas P",
+  "name": "Duo"
+ },
+ {
+  "slug": "tortatrad-aurora",
+  "catId": "tortatrad",
+  "catName": "Tortas Tradicionais",
+  "name": "Aurora"
+ },
+ {
+  "slug": "tortatrad-brigadeiro",
+  "catId": "tortatrad",
+  "catName": "Tortas Tradicionais",
+  "name": "Brigadeiro"
+ },
+ {
+  "slug": "tortatrad-diplomata",
+  "catId": "tortatrad",
+  "catName": "Tortas Tradicionais",
+  "name": "Diplomata"
+ },
+ {
+  "slug": "tortatrad-dulce",
+  "catId": "tortatrad",
+  "catName": "Tortas Tradicionais",
+  "name": "Dulce"
+ },
+ {
+  "slug": "tortatrad-isabelle",
+  "catId": "tortatrad",
+  "catName": "Tortas Tradicionais",
+  "name": "Isabelle"
+ },
+ {
+  "slug": "tortatrad-julia",
+  "catId": "tortatrad",
+  "catName": "Tortas Tradicionais",
+  "name": "Júlia"
+ },
+ {
+  "slug": "tortatrad-lua-nova",
+  "catId": "tortatrad",
+  "catName": "Tortas Tradicionais",
+  "name": "Lua Nova"
+ },
+ {
+  "slug": "tortatrad-prestigio",
+  "catId": "tortatrad",
+  "catName": "Tortas Tradicionais",
+  "name": "Prestígio"
+ },
+ {
+  "slug": "tortatrad-quindim",
+  "catId": "tortatrad",
+  "catName": "Tortas Tradicionais",
+  "name": "Quindim"
+ },
+ {
+  "slug": "tortaesp-abacaxi-com-coco",
+  "catId": "tortaesp",
+  "catName": "Tortas Especiais",
+  "name": "Abacaxi com Coco"
+ },
+ {
+  "slug": "tortaesp-abacaxi",
+  "catId": "tortaesp",
+  "catName": "Tortas Especiais",
+  "name": "Abacaxi"
+ },
+ {
+  "slug": "tortaesp-amendocream",
+  "catId": "tortaesp",
+  "catName": "Tortas Especiais",
+  "name": "Amendocream"
+ },
+ {
+  "slug": "tortaesp-bem-casado",
+  "catId": "tortaesp",
+  "catName": "Tortas Especiais",
+  "name": "Bem-Casado"
+ },
+ {
+  "slug": "tortaesp-iolanda",
+  "catId": "tortaesp",
+  "catName": "Tortas Especiais",
+  "name": "Iolanda"
+ },
+ {
+  "slug": "tortaesp-marta-rocha",
+  "catId": "tortaesp",
+  "catName": "Tortas Especiais",
+  "name": "Marta Rocha"
+ },
+ {
+  "slug": "tortaesp-morango-com-chocolate",
+  "catId": "tortaesp",
+  "catName": "Tortas Especiais",
+  "name": "Morango com Chocolate"
+ },
+ {
+  "slug": "tortaesp-morango-merengue",
+  "catId": "tortaesp",
+  "catName": "Tortas Especiais",
+  "name": "Morango Merengue"
+ },
+ {
+  "slug": "tortaesp-morango-com-nata",
+  "catId": "tortaesp",
+  "catName": "Tortas Especiais",
+  "name": "Morango com Nata"
+ },
+ {
+  "slug": "tortaesp-nozes",
+  "catId": "tortaesp",
+  "catName": "Tortas Especiais",
+  "name": "Nozes"
+ }
+]

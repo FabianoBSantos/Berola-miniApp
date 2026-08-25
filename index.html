@@ -202,6 +202,10 @@ main{max-width:1100px;margin:0 auto;padding:6px 16px 120px}
   transition:transform .15s ease;
 }
 .card:active{transform:scale(.98)}
+.card.sold-out .thumb img{filter:grayscale(1);opacity:.55}
+.card.sold-out .foot .price{text-decoration:line-through;opacity:.6}
+.sold-out-badge{position:absolute;top:8px;left:8px;background:var(--navy);color:#fff;font-size:.72rem;font-weight:700;padding:4px 9px;border-radius:20px;z-index:2}
+.card.sold-out .add{background:#ccc!important;cursor:not-allowed}
 .card .thumb{
   aspect-ratio:1/1;background:linear-gradient(135deg,var(--navy),var(--navy-2));
   display:flex;align-items:center;justify-content:center;color:var(--gold);font-size:2.1rem;
@@ -943,6 +947,10 @@ function renderChips(){
 }
 
 document.getElementById('addToCartBtn').addEventListener('click', ()=>{
+  if(typeof isSoldOut === 'function' && isSoldOut(currentItem.slug)){
+    alert('Esse item está esgotado no momento.');
+    return;
+  }
   const cat = CATS.find(c=>c.id===currentItem.catId);
   addLine(currentItem, cat, cat.sized?currentSize:null, currentQty, document.getElementById('itemObs').value.trim());
   itemOverlay.classList.remove('show');
@@ -1264,6 +1272,72 @@ if('serviceWorker' in navigator){
 
 refreshCartUI();
 setMode('entrega');
+
+/* =========================================================
+   Estoque e preços dinâmicos (banco de dados via /api/catalog)
+   ========================================================= */
+let STOCK = {};
+
+function isSoldOut(slug){
+  return STOCK[slug] === 0;
+}
+
+function applyPriceOverride(catId, priceData){
+  const cat = CATS.find(c=>c.id===catId);
+  if(!cat || !priceData) return;
+  if(cat.sized){
+    if(typeof priceData.priceP === 'number') cat.priceP = priceData.priceP;
+    if(typeof priceData.priceG === 'number') cat.priceG = priceData.priceG;
+  } else if(typeof priceData.price === 'number'){
+    cat.price = priceData.price;
+  }
+  const p = document.querySelector('#'+catId+' .section-head p');
+  if(p){
+    p.textContent = cat.sized ? `A partir de ${fmt(cat.priceP)}` : fmt(cat.price) + (cat.unitLabel ? ' — '+cat.unitLabel : '');
+  }
+  const grid = document.getElementById('grid-'+catId);
+  if(grid){
+    grid.querySelectorAll('.card').forEach(card=>{
+      const found = findItem(card.dataset.slug);
+      if(!found) return;
+      const priceEl = card.querySelector('.price');
+      if(priceEl){
+        priceEl.innerHTML = cat.sized ? `${fmt(cat.priceP)} <small>/ ${fmt(cat.priceG)} G</small>` : fmt(cat.price);
+      }
+    });
+  }
+}
+
+function markSoldOut(slug){
+  const card = document.querySelector('.card[data-slug="'+slug+'"]');
+  if(!card || card.classList.contains('sold-out')) return;
+  card.classList.add('sold-out');
+  const thumb = card.querySelector('.thumb');
+  if(thumb && !thumb.querySelector('.sold-out-badge')){
+    const badge = document.createElement('span');
+    badge.className = 'sold-out-badge';
+    badge.textContent = 'Esgotado';
+    thumb.appendChild(badge);
+  }
+  const addBtn = card.querySelector('.add');
+  if(addBtn) addBtn.disabled = true;
+}
+
+async function loadCatalogOverrides(){
+  try{
+    const res = await fetch('/api/catalog', {cache:'no-store'});
+    if(!res.ok) return;
+    const data = await res.json();
+    STOCK = data.stock || {};
+    const prices = data.prices || {};
+    Object.keys(prices).forEach(catId => applyPriceOverride(catId, prices[catId]));
+    Object.keys(STOCK).forEach(slug => { if(STOCK[slug] === 0) markSoldOut(slug); });
+  }catch(e){
+    /* Sem conexão com o banco: site continua funcionando com os preços padrão e sem bloqueio de estoque */
+  }
+}
+loadCatalogOverrides();
+
 </script>
 </body>
 </html>

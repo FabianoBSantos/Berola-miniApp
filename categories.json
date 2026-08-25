@@ -1,0 +1,82 @@
+[
+ {
+  "id": "doces",
+  "name": "Doces",
+  "price": 8.5,
+  "priceP": null,
+  "priceG": null,
+  "sized": false
+ },
+ {
+  "id": "balde",
+  "name": "Bolos de Balde",
+  "price": 14.0,
+  "priceP": null,
+  "priceG": null,
+  "sized": false
+ },
+ {
+  "id": "zero",
+  "name": "Linha Zero",
+  "price": 10.0,
+  "priceP": null,
+  "priceG": null,
+  "sized": false
+ },
+ {
+  "id": "mini",
+  "name": "Mini Doces",
+  "price": 4.0,
+  "priceP": null,
+  "priceG": null,
+  "sized": false
+ },
+ {
+  "id": "mousse",
+  "name": "Mousses e Pavês",
+  "price": 12.0,
+  "priceP": null,
+  "priceG": null,
+  "sized": false
+ },
+ {
+  "id": "sorvete",
+  "name": "Sorvetes",
+  "price": null,
+  "priceP": 10.0,
+  "priceG": 25.0,
+  "sized": true
+ },
+ {
+  "id": "tortasorvete",
+  "name": "Tortas de Sorvete",
+  "price": 52.0,
+  "priceP": null,
+  "priceG": null,
+  "sized": false
+ },
+ {
+  "id": "tortap",
+  "name": "Tortas P",
+  "price": 55.0,
+  "priceP": null,
+  "priceG": null,
+  "sized": false
+ },
+ {
+  "id": "tortatrad",
+  "name": "Tortas Tradicionais",
+  "price": 78.0,
+  "priceP": null,
+  "priceG": null,
+  "sized": false
+ },
+ {
+  "id": "tortaesp",
+  "name": "Tortas Especiais",
+  "price": 70.0,
+  "priceP": null,
+  "priceG": null,
+  "sized": false
+ }
+]
