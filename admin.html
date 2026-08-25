@@ -163,18 +163,34 @@ async function saveStock(slug, value, inputEl){
       method:'POST', headers:{'Content-Type':'application/json'},
       body: JSON.stringify({type:'stock', slug, value})
     });
-    if(r.ok){ flashSaved(); currentStock[slug] = value; inputEl.classList.toggle('zero', value===0); }
+    if(r.ok){
+      flashSaved(); currentStock[slug] = value; inputEl.classList.toggle('zero', value===0);
+    } else {
+      const data = await r.json().catch(()=>({}));
+      alert('Erro ao salvar (status '+r.status+'): '+(data.error||'desconhecido'));
+    }
+  }catch(e){
+    alert('Erro de conexão ao salvar: '+e.message);
   }finally{
     inputEl.disabled = false;
   }
 }
 
 async function savePrice(catId, value){
-  const r = await fetch('/api/admin/save', {
-    method:'POST', headers:{'Content-Type':'application/json'},
-    body: JSON.stringify({type:'price', catId, value})
-  });
-  if(r.ok){ flashSaved(); currentPrices[catId] = value; }
+  try{
+    const r = await fetch('/api/admin/save', {
+      method:'POST', headers:{'Content-Type':'application/json'},
+      body: JSON.stringify({type:'price', catId, value})
+    });
+    if(r.ok){
+      flashSaved(); currentPrices[catId] = value;
+    } else {
+      const data = await r.json().catch(()=>({}));
+      alert('Erro ao salvar (status '+r.status+'): '+(data.error||'desconhecido'));
+    }
+  }catch(e){
+    alert('Erro de conexão ao salvar: '+e.message);
+  }
 }
 
 function render(filter){
