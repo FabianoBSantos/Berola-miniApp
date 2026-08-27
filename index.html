@@ -206,6 +206,9 @@ main{max-width:1100px;margin:0 auto;padding:6px 16px 120px}
 .card.sold-out .foot .price{text-decoration:line-through;opacity:.6}
 .sold-out-badge{position:absolute;top:8px;left:8px;background:var(--navy);color:#fff;font-size:.72rem;font-weight:700;padding:4px 9px;border-radius:20px;z-index:2}
 .card.sold-out .add{background:#ccc!important;cursor:not-allowed}
+.promo-badge{position:absolute;top:8px;right:8px;background:#b9700a;color:#fff;font-size:.7rem;font-weight:700;padding:4px 9px;border-radius:20px;z-index:2}
+.foot .price .old-price{text-decoration:line-through;opacity:.55;font-size:.85em;margin-right:4px;font-weight:400}
+.foot .price .promo-price{color:#b9700a}
 .card .thumb{
   aspect-ratio:1/1;background:linear-gradient(135deg,var(--navy),var(--navy-2));
   display:flex;align-items:center;justify-content:center;color:var(--gold);font-size:2.1rem;
@@ -424,6 +427,7 @@ textarea.obs{width:100%;border:1.5px solid var(--line);border-radius:12px;paddin
     </div>
     <div class="sh-body">
       <div class="thumb-lg" id="itemThumb">B</div>
+      <span class="promo-badge" id="itemPromoBadge" style="display:none;position:static;margin-bottom:8px">Promoção</span>
       <p id="itemDesc"></p>
 
       <div id="sizeBlock" style="display:none">
@@ -936,16 +940,30 @@ document.getElementById('qtyPlus').addEventListener('click', ()=>{
 
 function currentUnitPrice(){
   const cat = CATS.find(c=>c.id===currentItem.catId);
-  if(cat.sized) return currentSize==='P' ? cat.priceP : cat.priceG;
+  const ov = ITEM_PRICES[currentItem.slug];
+  if(cat.sized){
+    if(ov && typeof ov.priceP === 'number' && typeof ov.priceG === 'number'){
+      return currentSize==='P' ? ov.priceP : ov.priceG;
+    }
+    return currentSize==='P' ? cat.priceP : cat.priceG;
+  }
+  if(ov && typeof ov.price === 'number') return ov.price;
   return cat.price;
 }
 function updateAddBtn(){
   const total = currentUnitPrice() * currentQty;
   const addBtn = document.getElementById('addToCartBtn');
   const hint = document.getElementById('stockHint');
+  const promoBadge = document.getElementById('itemPromoBadge');
   const qtyPlusBtn = document.getElementById('qtyPlus');
   const qtyMinusBtn = document.getElementById('qtyMinus');
   const soldOut = currentItem && typeof isSoldOut === 'function' && isSoldOut(currentItem.slug);
+
+  if(currentItem){
+    const cat = CATS.find(c=>c.id===currentItem.catId);
+    const eff = (typeof effectiveItemPrice === 'function') ? effectiveItemPrice(currentItem.slug, cat) : {isPromo:false};
+    promoBadge.style.display = eff.isPromo ? 'inline-block' : 'none';
+  }
 
   if(soldOut){
     addBtn.textContent = 'Esgotado';
@@ -1017,7 +1035,15 @@ document.getElementById('addToCartBtn').addEventListener('click', ()=>{
 });
 
 function addLine(item, cat, size, qty, obs){
-  const unitPrice = cat.sized ? (size==='P'?cat.priceP:cat.priceG) : cat.price;
+  const ov = ITEM_PRICES[item.slug];
+  let unitPrice;
+  if(cat.sized){
+    unitPrice = (ov && typeof ov.priceP === 'number' && typeof ov.priceG === 'number')
+      ? (size==='P'?ov.priceP:ov.priceG)
+      : (size==='P'?cat.priceP:cat.priceG);
+  } else {
+    unitPrice = (ov && typeof ov.price === 'number') ? ov.price : cat.price;
+  }
   cart.push({
     id: Date.now()+'-'+Math.random().toString(36).slice(2,7),
     slug:item.slug, name:item.name, catId:cat.id, catName:cat.name,
@@ -1335,9 +1361,45 @@ setMode('entrega');
    Estoque e preços dinâmicos (banco de dados via /api/catalog)
    ========================================================= */
 let STOCK = {};
+let ITEM_PRICES = {};
 
 function isSoldOut(slug){
   return STOCK[slug] === 0;
+}
+
+function effectiveItemPrice(slug, cat){
+  const ov = ITEM_PRICES[slug];
+  if(cat.sized){
+    if(ov && typeof ov.priceP === 'number' && typeof ov.priceG === 'number'){
+      return { priceP: ov.priceP, priceG: ov.priceG, isPromo: ov.priceP < cat.priceP || ov.priceG < cat.priceG };
+    }
+    return { priceP: cat.priceP, priceG: cat.priceG, isPromo: false };
+  }
+  if(ov && typeof ov.price === 'number'){
+    return { price: ov.price, isPromo: ov.price < cat.price };
+  }
+  return { price: cat.price, isPromo: false };
+}
+
+function renderCardPrice(card, slug, cat){
+  const priceEl = card.querySelector('.price');
+  const thumb = card.querySelector('.thumb');
+  if(!priceEl) return;
+  const eff = effectiveItemPrice(slug, cat);
+  const priceTxt = cat.sized ? `${fmt(eff.priceP)} <small>/ ${fmt(eff.priceG)} G</small>` : fmt(eff.price);
+  priceEl.innerHTML = priceTxt;
+
+  let badge = thumb ? thumb.querySelector('.promo-badge') : null;
+  if(eff.isPromo){
+    if(thumb && !badge){
+      badge = document.createElement('span');
+      badge.className = 'promo-badge';
+      badge.textContent = 'Promoção';
+      thumb.appendChild(badge);
+    }
+  } else if(badge){
+    badge.remove();
+  }
 }
 
 function applyPriceOverride(catId, priceData){
@@ -1358,12 +1420,19 @@ function applyPriceOverride(catId, priceData){
     grid.querySelectorAll('.card').forEach(card=>{
       const found = findItem(card.dataset.slug);
       if(!found) return;
-      const priceEl = card.querySelector('.price');
-      if(priceEl){
-        priceEl.innerHTML = cat.sized ? `${fmt(cat.priceP)} <small>/ ${fmt(cat.priceG)} G</small>` : fmt(cat.price);
-      }
+      renderCardPrice(card, card.dataset.slug, cat);
     });
   }
+}
+
+function applyItemPriceOverrides(itemPrices){
+  ITEM_PRICES = itemPrices || {};
+  Object.keys(ITEM_PRICES).forEach(slug=>{
+    const found = findItem(slug);
+    if(!found) return;
+    const card = document.querySelector('.card[data-slug="'+slug+'"]');
+    if(card) renderCardPrice(card, slug, found.cat);
+  });
 }
 
 function markSoldOut(slug){
@@ -1389,6 +1458,7 @@ async function loadCatalogOverrides(){
     STOCK = data.stock || {};
     const prices = data.prices || {};
     Object.keys(prices).forEach(catId => applyPriceOverride(catId, prices[catId]));
+    applyItemPriceOverrides(data.itemPrices || {});
     Object.keys(STOCK).forEach(slug => { if(STOCK[slug] === 0) markSoldOut(slug); });
     // Se o modal de um item já estava aberto (ex: link direto) antes do estoque carregar, atualiza agora
     if(itemOverlay.classList.contains('show') && currentItem){

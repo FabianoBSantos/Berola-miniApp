@@ -11,6 +11,7 @@ module.exports = async function handler(req, res) {
   res.status(200).json({
     prices: data.prices,
     stock: data.stock,
+    itemPrices: data.itemPrices,
     defaults: categories
   });
 };
