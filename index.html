@@ -853,11 +853,22 @@ const cartOverlay = document.getElementById('cartOverlay');
 
 document.querySelectorAll('[data-close]').forEach(btn=>{
   btn.addEventListener('click', ()=>{
-    document.getElementById(btn.dataset.close).classList.remove('show');
+    const targetId = btn.dataset.close;
+    document.getElementById(targetId).classList.remove('show');
+    if(targetId === 'itemOverlay'){
+      history.replaceState(null,'',location.pathname);
+    }
   });
 });
 [itemOverlay, cartOverlay].forEach(ov=>{
-  ov.addEventListener('click', e=>{ if(e.target===ov) ov.classList.remove('show'); });
+  ov.addEventListener('click', e=>{
+    if(e.target===ov){
+      ov.classList.remove('show');
+      if(ov === itemOverlay){
+        history.replaceState(null,'',location.pathname);
+      }
+    }
+  });
 });
 
 function openItemModal(slug){
