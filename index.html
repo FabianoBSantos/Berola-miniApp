@@ -439,6 +439,7 @@ textarea.obs{width:100%;border:1.5px solid var(--line);border-radius:12px;paddin
         <span id="qtyVal">1</span>
         <button type="button" id="qtyPlus">+</button>
       </div>
+      <div class="nudge" id="stockHint" style="display:none"></div>
 
       <span class="field-label">Observação (opcional)</span>
       <textarea class="obs" id="itemObs" placeholder="Ex: sem castanha, embalar para presente..."></textarea>
@@ -898,12 +899,23 @@ function setSize(size){
 document.getElementById('sizeP').addEventListener('click', ()=>setSize('P'));
 document.getElementById('sizeG').addEventListener('click', ()=>setSize('G'));
 
+function remainingStock(slug){
+  if(typeof STOCK[slug] !== 'number') return Infinity; // sem controle de estoque definido = sem limite
+  const inCart = cart.reduce((s,l)=> l.slug===slug ? s+l.qty : s, 0);
+  return Math.max(0, STOCK[slug] - inCart);
+}
+
 document.getElementById('qtyMinus').addEventListener('click', ()=>{
   currentQty = Math.max(1, currentQty-1);
   document.getElementById('qtyVal').textContent = currentQty;
   updateAddBtn();
 });
 document.getElementById('qtyPlus').addEventListener('click', ()=>{
+  const max = (typeof remainingStock === 'function') ? remainingStock(currentItem.slug) : Infinity;
+  if(currentQty >= max){
+    document.getElementById('qtyVal').textContent = currentQty;
+    return;
+  }
   currentQty += 1;
   document.getElementById('qtyVal').textContent = currentQty;
   updateAddBtn();
@@ -917,6 +929,18 @@ function currentUnitPrice(){
 function updateAddBtn(){
   const total = currentUnitPrice() * currentQty;
   document.getElementById('addToCartBtn').textContent = 'Adicionar — ' + fmt(total);
+  const hint = document.getElementById('stockHint');
+  if(currentItem && typeof STOCK[currentItem.slug] === 'number'){
+    const remaining = remainingStock(currentItem.slug);
+    if(remaining <= 5){
+      hint.style.display = 'block';
+      hint.textContent = remaining <= 0 ? 'Sem estoque disponível.' : `Restam ${remaining} no estoque.`;
+    } else {
+      hint.style.display = 'none';
+    }
+  } else {
+    hint.style.display = 'none';
+  }
 }
 
 /* upsell chips inside item modal */
@@ -949,6 +973,10 @@ function renderChips(){
 document.getElementById('addToCartBtn').addEventListener('click', ()=>{
   if(typeof isSoldOut === 'function' && isSoldOut(currentItem.slug)){
     alert('Esse item está esgotado no momento.');
+    return;
+  }
+  if(typeof remainingStock === 'function' && currentQty > remainingStock(currentItem.slug)){
+    alert('Não há estoque suficiente para essa quantidade.');
     return;
   }
   const cat = CATS.find(c=>c.id===currentItem.catId);

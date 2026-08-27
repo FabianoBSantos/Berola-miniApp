@@ -32,6 +32,9 @@
   #panel{display:none}
   .toolbar{display:flex;gap:10px;margin:14px 0;flex-wrap:wrap}
   #searchBox{flex:1;min-width:200px;padding:10px 12px;border:1px solid var(--line);border-radius:8px;font-size:.95rem}
+  #zeroEmptyBtn{padding:10px 14px;border:1px solid var(--line);border-radius:8px;background:#fff;cursor:pointer;font-size:.85rem;white-space:nowrap}
+  #zeroEmptyBtn:hover{background:#f3efe2}
+  #zeroEmptyBtn:disabled{opacity:.5;cursor:not-allowed}
   .savedFlag{color:var(--ok);font-size:.8rem;opacity:0;transition:opacity .3s}
   .savedFlag.show{opacity:1}
 
@@ -72,6 +75,7 @@
 <main id="panel">
   <div class="toolbar">
     <input id="searchBox" type="text" placeholder="Buscar produto por nome...">
+    <button id="zeroEmptyBtn" type="button">Zerar estoque em branco</button>
     <span class="savedFlag" id="savedFlag">✓ Salvo</span>
   </div>
   <p class="hint">Deixe o estoque em <strong>0</strong> pra um produto sumir da venda no site (ele fica marcado como "Esgotado"). O preço se aplica a todos os itens da categoria.</p>
@@ -271,6 +275,36 @@ function render(filter){
 }
 
 document.getElementById('searchBox').addEventListener('input', (e)=>render(e.target.value));
+
+document.getElementById('zeroEmptyBtn').addEventListener('click', async ()=>{
+  const empty = ITEMS.filter(it => currentStock[it.slug] === undefined || currentStock[it.slug] === null);
+  if(empty.length === 0){
+    alert('Todos os produtos já têm uma quantidade definida.');
+    return;
+  }
+  const ok = confirm(`Isso vai zerar o estoque de ${empty.length} produto(s) que ainda não têm quantidade definida (eles ficarão marcados como "Esgotado" até você preencher a quantidade real). Continuar?`);
+  if(!ok) return;
+
+  const btn = document.getElementById('zeroEmptyBtn');
+  btn.disabled = true;
+  const originalText = btn.textContent;
+  let done = 0;
+  for(const it of empty){
+    btn.textContent = `Zerando... (${done+1}/${empty.length})`;
+    try{
+      const r = await fetch('/api/admin/save', {
+        method:'POST', headers:{'Content-Type':'application/json'},
+        body: JSON.stringify({type:'stock', slug: it.slug, value: 0})
+      });
+      if(r.ok){ currentStock[it.slug] = 0; done++; }
+    }catch(e){ /* segue tentando os demais */ }
+  }
+  btn.disabled = false;
+  btn.textContent = originalText;
+  flashSaved();
+  render(document.getElementById('searchBox').value);
+  alert(`Pronto! ${done} de ${empty.length} produto(s) foram zerados.`);
+});
 
 async function boot(){
   loginScreen.style.display = 'none';
