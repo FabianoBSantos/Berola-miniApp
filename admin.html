@@ -136,7 +136,7 @@ logoutBtn.addEventListener('click', async ()=>{
 async function loadData(){
   const [itemsRes, catalogRes] = await Promise.all([
     fetch('/items.json'),
-    fetch('/api/catalog')
+    fetch('/api/catalog', {cache:'no-store'})
   ]);
   ITEMS = await itemsRes.json();
   const catalog = await catalogRes.json();

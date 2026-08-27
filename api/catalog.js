@@ -7,7 +7,7 @@ module.exports = async function handler(req, res) {
     return;
   }
   const data = await readCatalog();
-  res.setHeader('Cache-Control', 's-maxage=15, stale-while-revalidate=45');
+  res.setHeader('Cache-Control', 'no-store, must-revalidate');
   res.status(200).json({
     prices: data.prices,
     stock: data.stock,
